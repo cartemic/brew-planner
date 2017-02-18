@@ -3,7 +3,7 @@
 \begin{document}
 
 \section{Specific Gravity Correction}
-    The specific gravity reading $SG_{rdg}$ from the hydrometer is corrected for temperature by multiplying by the water density correction factor
+    This section details the methods for specific gravity correction used in the \texttt{correctSG()} function. The specific gravity reading $SG_{reading}$ from the hydrometer is corrected for temperature by multiplying by the water density correction factor
     
     \begin{equation}
         SG_{corr} = a - b T + c T^{2} - d T^{3}
@@ -12,10 +12,10 @@
     such that
     
     \begin{equation}
-        SG = SG_{rdg} SG_{corr}
+        SG = SG_{reading} SG_{corr}
     \end{equation}
     
-    where $T$ is the fluid temperature in degrees Fahrenheit and the coefficients a-d are given in Table \ref{tab:sgcorr}. This correction applies to original ($OG$) and final ($FG$) gravities, which are then used to calculate alcohol and caloric content. This correction factor is based on a curve fit and should  be accurate between 32$\degree$F and 212$\degree$F \cite{hall_1995}.
+    where $T$ is the fluid temperature in \tdeg F and the coefficients a-d are given in Table \ref{tab:sgcorr}. This correction applies to original ($OG$) and final ($FG$) gravities, which are then used to calculate alcohol and caloric content. This correction factor is based on a curve fit and should  be accurate between 32$\degree$F and 212$\degree$F \cite{hall_1995}.
     
     \begin{table}[H]
         \centering

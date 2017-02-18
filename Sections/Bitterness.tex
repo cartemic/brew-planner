@@ -3,5 +3,44 @@
 \begin{document}
 
 \section{Bitterness}
+    This section details the methods for IBU estimation used in the \texttt{calcIBU()} function. All equations are from \cite{Palmer}.
+    
+    \subsection{Alpha Acid Units}
+        To calculate the alpha acid units, the formula    
+        \begin{equation}
+            AAU_{i} = m_{i}A_{i}
+        \end{equation}
+        is used where $m_{i}$ and $A_{i}$ are the mass and alpha acid percentage of hop variety $i$, respectively.
+    
+    \subsection{Hop Utilization}
+        Tinseth's formulae are used to calculate the time and gravity factors. The time factor for the $i$th hop addition, $f_{t,i}$ is calculated as
+        \begin{equation}
+            f_{t,i} = \frac{1-\exp(-0.04t_{i}}{4.15}
+        \end{equation}
+        
+        where $t_{i}$ is the boil time of hop addition $i$. The boil gravity factor, $f_{G}$ is calculated as
+        
+        \begin{equation}
+            f_{G} = 1.0256 \left( SG_{boil} - 40 (SG_{boil} - 1)^{2} \right)
+        \end{equation}
+        
+        and is taken to be constant for all hop additions. \todo{add in SG estimation as a functin of boil time} Using these values, the utilization of the $i$th hop addition, $U_{i}$, is
+        
+        \begin{equation}
+            U_{i} = f_{t,i}f_{G}.
+        \end{equation}
+    
+    \subsection{IBU Calculation}
+        The IBUs from the $i$th addition are
+        
+        \begin{equation}
+            IBU_{i} = \frac{74.89 AAU_{i} U_{i}}{\vol}
+        \end{equation}
+        
+        which are then summed to obtain an estimate for overall batch IBUs.
+        
+        \begin{equation}
+            IBU_{batch} = \sum_{i} IBU_{i}
+        \end{equation}
 
 \end{document}

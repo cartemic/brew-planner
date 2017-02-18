@@ -3,15 +3,16 @@
 \begin{document}
 
 \section{Color}
+    This section details the methods for color prediction used in the \texttt{predictColor()} function.
 
     \subsection{$MCU$}
     The number of malt color units is calculated by using the Lovibond color of the grains
     
         \begin{equation}
-            MCU = \frac{\sum_{i}GC_{i}m_{i}}{\vol}
+            MCU = \frac{\sum_{i}L_{i}m_{i}}{\vol}
         \end{equation}
         
-    where $GC_{i}$ is the grain color of the $i$th grain in degrees Lovibond, $m_{i}$ is the mass of the $i$th grain in pounds, and $\vol$ is the batch volume in gallons.
+    where $L_{i}$ is the grain color of the $i$th grain in \tdeg L, $m_{i}$ is the mass of the $i$th grain in pounds, and $\vol$ is the batch volume in gallons.
     
     \subsection{$SRM$}
     The color of the batch is estimated using the Morey formula, which is based on the work of Mosher and Daniels \cite{morey}.
@@ -21,6 +22,6 @@
             \label{eq:srm}
         \end{equation}
     
-    for $SRM < 50$.
+    for $SRM < 50$, which should cover pretty much all of the beers per Palmer, who asserts that judges cannot reliable distinguish beers above 40 \tdeg SRM. Any estimation of color is good to within approximately $\pm$ 20\% \cite{Palmer}.
 
 \end{document}
