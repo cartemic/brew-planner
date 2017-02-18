@@ -1,0 +1,26 @@
+\documentclass[../main.tex]{subfiles}
+\dobib
+\begin{document}
+
+\section{Color}
+
+    \subsection{$MCU$}
+    The number of malt color units is calculated by using the Lovibond color of the grains
+    
+        \begin{equation}
+            MCU = \frac{\sum_{i}GC_{i}m_{i}}{\vol}
+        \end{equation}
+        
+    where $GC_{i}$ is the grain color of the $i$th grain in degrees Lovibond, $m_{i}$ is the mass of the $i$th grain in pounds, and $\vol$ is the batch volume in gallons.
+    
+    \subsection{$SRM$}
+    The color of the batch is estimated using the Morey formula, which is based on the work of Mosher and Daniels \cite{morey}.
+    
+        \begin{equation}
+            SRM = 1.4922 MCU^{0.6859}
+            \label{eq:srm}
+        \end{equation}
+    
+    for $SRM < 50$.
+
+\end{document}

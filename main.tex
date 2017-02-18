@@ -1,0 +1,144 @@
+\documentclass{paper}
+
+% packages and stuff
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+    \geometry{a4paper}
+    \geometry{margin=1in}
+
+\usepackage[pdftex]{graphicx}
+\usepackage{graphicx}
+\usepackage{amsmath,etoolbox}
+\usepackage{empheq}
+\usepackage{verbatim}
+\usepackage{tikz}
+    \usetikzlibrary{calc,patterns,angles,quotes,shapes,positioning}
+\usepackage{bm}
+\usepackage{cancel}
+\usepackage{subfiles}
+\usepackage{subcaption}
+\usepackage{ulem}
+\usepackage{bigstrut}
+\usepackage{bm}
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage[colorinlistoftodos]{todonotes}
+%Required packages for todonotes
+\usepackage{calc}
+\usepackage{xkeyval}
+\usepackage{xcolor}
+\usepackage{ifthen}
+\usepackage{mhchem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Put awesome color coded Python things in for the code 
+\usepackage{listings}
+\usepackage{color}
+\usepackage{courier}
+%New colors defined below
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+%Code listing style named "mystyle"
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour},   commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\scriptsize\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\small\ttfamily,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+
+\lstset{style=mystyle}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{caption}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyvrb}
+\usepackage{comment}
+\usepackage{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+% capital H is a champion
+\usepackage{float}
+    \restylefloat{table}
+    
+% I like typing \degree
+\usepackage{xspace}
+    \newcommand{\degree}{\ensuremath{{}^{\circ}}\xspace}
+
+\graphicspath{{Assignment_4/Images/}{Assignment_4/Code/}{Images/}{../Images}{../../Images}}
+\pagestyle{plain}
+
+% add nomenclature section
+\usepackage{nomencl}
+
+%\pagenumbering{gobble}
+\setlength\parindent{0pt}
+\setlength{\parskip}{1em}
+\relpenalty=10000 % don't split equations!!
+\binoppenalty=10000 % don't split equations!!
+
+\title{Brewing Equations}
+\author{Mick Carter\\
+        Last Edited \today}
+
+\makeatletter
+\define@key{Gin}{figsize}[true]{%
+    \edef\@tempa{{Gin}{width=0.75\textwidth}}%
+    \expandafter\setkeys\@tempa
+}
+\makeatother
+
+% bibliography stuff
+\usepackage[backend=biber,style=ieee]{biblatex}
+\newcommand{\dobib}{ % Define the command
+    \bibliography{../sources} % Place the path relative to the subfile here
+}
+\bibliography{sources}
+
+% add volume v
+\newcommand{\vol}{\ensuremath{\text{\textsf{\sout{v}}}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\renewcommand{\dobib}{} % Un-define the command
+
+\maketitle
+
+\tableofcontents
+
+\subfile{Sections/Nomenclature.tex}
+
+\subfile{Sections/SGcorrection.tex}
+
+\subfile{Sections/Extraction.tex}
+
+\subfile{Sections/Attenuation.tex}
+
+\subfile{Sections/AlcoholContent.tex}
+
+\subfile{Sections/CaloricContent.tex}
+
+\subfile{Sections/Carbonation.tex}
+
+\subfile{Sections/Bitterness.tex}
+
+\subfile{Sections/Color.tex}
+
+\printbibliography
+
+\end{document}
