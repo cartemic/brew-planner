@@ -42,7 +42,7 @@ def correctSG(SG_reading, T):
     SG_corr = a - b * T + c * T**2 - d * T**3
     
     # Correct SG reading
-    SG = SG_reading * SG_corr
+    SG = SG_reading + SG_corr
     
     # Output corrected reading
     return(SG)
@@ -72,6 +72,43 @@ def predictColor(grainBill, batchVol):
     
     # Output color prediction
     return(SRM)
+
+
+def calcIBU(hopSchedule, SG_boil, boilVol):
+    # Estimates batch IBUs using Tinseth's formulae from Palmer
+    #
+    # INPUTS:
+    # hopSchedule:  dictionary containing
+    #   m:  array of hop masses (oz)
+    #   AA: array of alpha acid percentages (%)
+    #   t:  array of hop addition times (min)
+    # SG_boil:      pre-boil specific gravity
+    # boilVol:      boil volume (gal)
+    #
+    # OUTPUTS:
+    # IBU_batch:    Estimated batch bitterness (IBUs)
+    
+    # Pull mass, AA%, and boil time info from hop schedule
+    m = hopSchedule['m']
+    AA = hopSchedule['AA']
+    t = hopSchedule['t']
+    
+    # Calculate array of Alpha Acid Units
+    AAU = m * AA
+    
+    # Calculate time and SG utilization factors
+    f_t = (1-np.exp(-0.04 * t)) / 4.15
+    f_G = 1.65 * 0.000125**(SG_boil-1)
+
+    # Calculate Utilization
+    U = f_t * f_G
+
+    # Calculate batch IBUs
+    IBU_batch = np.sum(74.89 * AAU * U) / boilVol
+
+    # Return IBUs
+    return(IBU_batch)
+    
 
 
 # %% USE FUNCTIONS
