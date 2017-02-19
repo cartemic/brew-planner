@@ -1,0 +1,12 @@
+grains-start
+name,gr1,gr2,gr3,gr4
+L,5,60,350,500
+m,6,0.5,0.5,0.25
+grains-end
+
+hops-start
+name,h1,h2
+AA,6.4,4.6
+m,1.5,1
+t,60,15
+hops-end
