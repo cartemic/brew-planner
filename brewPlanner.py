@@ -12,7 +12,8 @@ Created on Sat Feb 18 10:37:56 2017
 
 # %% IMPORT PACKAGES
 import numpy as np
-import matplotlib.pyplot as plt
+import re
+import linecache
 
 
 # %% DEFINE TERMS
@@ -109,6 +110,63 @@ def calcIBU(hopSchedule, SG_boil, boilVol):
     # Return IBUs
     return(IBU_batch)
     
+
+def infoGet(fName, key):
+    # pulls a desired block of information from a recipe file
+    # 
+    # INPUTS:
+    #   fName:  string of the filepath for the desired recipe
+    #   key:    string of the key for the desired information block, e.g.
+    #           'grain' would return information about the grains etc.
+    #
+    # OUTPUT:
+    # dictOut:  dictionary of desired information
+    #
+    # NOTE: this routine assumes that all attributes other than 'name' are
+    #       floats and will convert them to a numpy float array without warning
+
+    # open recipe file
+    file = open(fName, 'r')
+    
+    # initialize blank dict for start/stop locations of desired information block
+    locations = {}
+    
+    # search recipe for desired information block
+    for num, line in enumerate(file, 1):
+        if key+'-start' in line:
+            locations['start'] = num+1
+        elif key+'-end' in line:
+            locations['end'] = num
+            break
+    
+    # define proper start and end lines for block
+    startLine = locations['start']
+    endLine = locations['end']
+    
+    # close recipe file
+    file.close()
+    
+    # initialize blank dictionary for desired output block
+    dictOut = {}
+    
+    # pull information from recipe file
+    for i in range(startLine, endLine):
+        # pull lines and remove carriage return
+        theLine = linecache.getline(fName, i)[:-1]
+        
+        # remove commas with regex
+        pattern = re.compile(',')
+        theLine = [x for x in pattern.split(theLine) if x]
+        
+        # build dictionary entry
+        attribute = theLine[0]
+        values = theLine[1:]
+        if attribute != 'name':
+            values = np.array(values, dtype='f')
+        dictOut[attribute] = values
+
+    # Return desired information
+    return(dictOut)
 
 
 # %% USE FUNCTIONS
