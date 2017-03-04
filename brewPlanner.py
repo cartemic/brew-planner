@@ -223,5 +223,8 @@ def yeastToPitch(pitchRate, OG, wortVol):
     return(pitchCell)
 
 
+def calcohol(OG, FG):
+    
+
 # %% USE FUNCTIONS
 # GOAL: build a gui for this as well
